@@ -1,8 +1,6 @@
-let areButtonsDisabled = false;
-
 async function init() {
     bindButtonEvents();
-    await showTab1();
+    await showTab('tab1');
 }
 
 function bindButtonEvents() {
@@ -10,117 +8,128 @@ function bindButtonEvents() {
     const tab2Button = document.querySelector('#tab2-button')
 
     tab1Button.onclick = () => {
-        if(!areButtonsDisabled){
-            tab1Button.classList.add('active');
-            tab2Button.classList.remove('active');
-
-            showTab1();
-        }
+        tab1Button.classList.add('active');
+        tab2Button.classList.remove('active');
+        tabsReset()
+        showTab('tab1');
     };
 
     tab2Button.onclick = () => {
-        if(!areButtonsDisabled) {
-            tab2Button.classList.add('active');
-            tab1Button.classList.remove('active');
-
-            showTab2();
-        }
+        tab2Button.classList.add('active');
+        tab1Button.classList.remove('active');
+        tabsReset()
+        showSecondTab('tab2');
     };
 }
 
-async function showTab1() {
-    areButtonsDisabled = true;
-    tab2Reset();
-
-    const tabNode = document.querySelector('#tab1');
+async function showTab(id) {
+    const logoNode = document.querySelector(`#container-${id}`)
+    logoNode.classList.remove('hidden');
+    const tabNode = document.querySelector(`#${id}`);
     tabNode.classList.remove('hidden');
 
+
+    renderNumbers(24)
+
     const rowNodes = [
-        document.querySelector("#tab1-row-1"),
-        document.querySelector("#tab1-row-2"),
-        document.querySelector("#tab1-row-3")];
+        document.querySelector(`#${id}-row-1`),
+        document.querySelector(`#${id}-row-2`),
+        document.querySelector(`#${id}-row-3`)];
+
 
     for (const rowNode of rowNodes) {
-        for (const spanNode of rowNode.children) {
-            await spanNode.type();
-        }
+        await spanNodeType(rowNode);
     }
+    const hiddenContentNodes = document.querySelector(`#${id}-hidden-content`);
+    await hiddenContentNodeAnimate(hiddenContentNodes);
 
-    const hiddenContentNodes = document.querySelector('#tab1-hidden-content').children;
-    for (const hiddenContentNode of hiddenContentNodes) {
-        hiddenContentNode.classList.add('animated');
-        await sleep(100);
-    }
-    areButtonsDisabled = false;
 }
 
-async function showTab2() {
-    areButtonsDisabled = true;
+function renderNumbers(number) {
+    const columnNode = document.getElementById('number-column');
+    columnNode.innerHTML = '';
 
-    tab1Reset();
+    for (let i = 1; i <= number; i++ ) {
+        const numberRowElement = document.createElement('div');
+        numberRowElement.innerText = i;
+        numberRowElement.className = 'container__code-container__row-numbers__row';
+        columnNode.append(numberRowElement);
+    }
+}
 
-    const tabNode = document.querySelector('#tab2');
+async function showSecondTab(id) {
+    const logoNode = document.querySelector(`#container-${id}`)
+    logoNode.classList.remove('hidden');
+    const tabNode = document.querySelector(`#${id}`)
     tabNode.classList.remove('hidden');
 
+    renderNumbers(48)
+
     const rowNodes = [
-        document.querySelector("#tab2-row-1"),
-        document.querySelector("#tab2-row-2"),
-        document.querySelector("#tab2-row-3")];
+        document.querySelector(`#${id}-row-1`),
+        document.querySelector(`#${id}-row-2`),
+        document.querySelector(`#${id}-row-3`)];
 
-    for (const rowNode of rowNodes) {
-        for (const spanNode of rowNode.children) {
-            await spanNode.type();
-        }
+    const hiddenContentNodes = [
+        document.querySelector(`#${id}-hidden-content-1`),
+        document.querySelector(`#${id}-hidden-content-2`),
+        document.querySelector(`#${id}-hidden-content-3`)
+    ]
+
+    await spanNodeType(rowNodes[0]);
+    await hiddenContentNodeAnimate(hiddenContentNodes[0]);
+    await spanNodeType(rowNodes[1]);
+    await hiddenContentNodeAnimate(hiddenContentNodes[1]);
+    await spanNodeType(rowNodes[2]);
+    await hiddenContentNodeAnimate(hiddenContentNodes[2]);
+}
+
+async function spanNodeType(rowNode) {
+    for(const spanNode of rowNode.children){
+        await spanNode.type();
     }
+}
 
-    const hiddenContentNodes = document.querySelector('#tab2-hidden-content').children;
-    for (const hiddenContentNode of hiddenContentNodes) {
-        hiddenContentNode.classList.add('animated');
+async function hiddenContentNodeAnimate(hiddenContentNode) {
+    for (const divNode of hiddenContentNode.children) {
+        divNode.classList.add('animated');
         await sleep(100);
     }
-
-    areButtonsDisabled = false;
 }
 
-function tab1Reset() {
-    const tabNode = document.querySelector('#tab1');
-    tabNode.classList.add('hidden');
-    const rowNodes = [
-        document.querySelector("#tab1-row-1"),
-        document.querySelector("#tab1-row-2"),
-        document.querySelector("#tab1-row-3")];
+function tabsReset() {
+    const resetOneTab = (id) => {
+        const logoNode = document.querySelector(`#container-${id}`)
+        logoNode.classList.add('hidden');
+        const tabNode = document.querySelector(`#${id}`);
+        tabNode.classList.add('hidden');
 
-    for (const rowNode of rowNodes) {
-        for (const spanNode of rowNode.children) {
-            spanNode.reset();
+        const rowNodes = [
+            document.querySelector(`#${id}-row-1`),
+            document.querySelector(`#${id}-row-2`),
+            document.querySelector(`#${id}-row-3`)];
+
+        const hiddenContentNodes = [
+            document.querySelector(`#${id}-hidden-content`),
+            document.querySelector(`#${id}-hidden-content-1`),
+            document.querySelector(`#${id}-hidden-content-2`),
+            document.querySelector(`#${id}-hidden-content-3`)
+        ].filter(v=> !!v);
+
+        for (const rowNode of rowNodes) {
+            for (const spanNode of rowNode.children) {
+                spanNode.reset();
+            }
+        }
+
+        for (const hiddenContentNode of hiddenContentNodes) {
+            for (const contentNode of hiddenContentNode.children){
+                contentNode.classList.remove('animated');
+            }
         }
     }
 
-    const hiddenContentNodes = document.querySelector('#tab1-hidden-content').children;
-    for (const hiddenContentNode of hiddenContentNodes) {
-        hiddenContentNode.classList.remove('animated');
-    }
-}
-
-function tab2Reset() {
-    const tabNode = document.querySelector('#tab2');
-    tabNode.classList.add('hidden');
-
-    const rowNodes = [
-        document.querySelector("#tab2-row-1"),
-        document.querySelector("#tab2-row-2"),
-        document.querySelector("#tab2-row-3")];
-
-    for (const rowNode of rowNodes) {
-        for (const spanNode of rowNode.children) {
-            spanNode.reset();
-        }
-    }
-
-    const hiddenContentNodes = document.querySelector('#tab2-hidden-content').children;
-    for (const hiddenContentNode of hiddenContentNodes) {
-        hiddenContentNode.classList.remove('animated');
-    }
+    ['tab1', 'tab2'].forEach(id => resetOneTab(id))
 }
 
 const sleep = time => new Promise(resolve => setTimeout(resolve, time))
@@ -132,7 +141,7 @@ class TypeAsync extends HTMLSpanElement {
     }
 
     async type() {
-        let text = this.innerHTML;
+        let text = this.attributes.getNamedItem('data-text').value;
         text = text.replace(/&lt;/, '<').replace(/&gt;/, '>');
         this.innerHTML = '';
         this.style.visibility = 'visible'

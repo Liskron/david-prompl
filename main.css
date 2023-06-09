@@ -9,12 +9,75 @@ body {
     background-color: #26223a;
     color: #FFF;
     font-family: "Open Sans", sans-serif;
+    font-size: 16px;
 }
 
-.container {
+.module {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.container-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(30% - 15px);
+    padding: 5px;
+}
+
+.container-logos > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-logos .img {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    align-items: center;
+}
+
+.container-logos .img img {
+    max-width: 100%;
+    margin-bottom: 20px;
+    max-height: 80px;
+}
+
+.container-logos .text-logo {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.container-logos .list {
+    font-size: 1em;
+
+    margin-bottom: 40px;
+}
+
+.container-logos .list > span {
+    font-weight: 600;
+}
+
+.container-logos .list > ul {
+    margin-top: 5px;
+}
+
+.container-logos .hidden {
+    display: none;
+}
+
+.container-code {
+    display: flex;
+    flex-direction: column;
+    width: calc(70% - 15px);
+    flex-shrink: 0;
     box-shadow: 0 2.74416px 2.74416px rgba(0, 0, 0, .0274351), 0 5.48831px 5.48831px rgba(0, 0, 0, .0400741), 0 13.7208px 10.9766px rgba(0, 0, 0, .0499982), 0 20.5812px 20.5812px rgba(0, 0, 0, .0596004), 0 41.1623px 41.1623px rgba(0, 0, 0, .0709366), 0 96.0454px 89.1851px rgba(0, 0, 0, .09);
     border-radius: 8px;
     border: 1px solid #30363d;
@@ -51,13 +114,15 @@ body {
 
 .container__code-container {
     display: flex;
-    /* align-items: stretch; */
+    max-height: 616px;
+    overflow-y: auto;
     width: 100%;
     background-color: #24292f;
     padding: 16px;
 }
 
 .container__code-container__row-numbers {
+    flex-shrink: 0;
     user-select: none;
     font-size: 16px;
     line-height: 24px;
@@ -69,7 +134,6 @@ body {
 }
 
 .container__code-container__content {
-    overflow-y: auto;
     background-color: #24292f;
 }
 
@@ -112,9 +176,13 @@ body {
 
 .hidden-content pre span {
     display: inline-block;
-    background-color: rgba(56,139,253,0.1);
+    background-color: rgba(56, 139, 253, 0.1);
     border-left: 2px solid #22B14C;
     padding-left: 3px;
+}
+
+.hidden-content pre span.no-border {
+    border: none;
 }
 
 .hidden-content > div.animated {
@@ -162,9 +230,43 @@ body {
 .red {
     color: #ff7b72;
 }
+
 .blue {
     color: #a5d6ff;
 }
+
 .gray {
     color: #8b949e;
+}
+
+/* Progress bar*/
+
+.progress-bar {
+    position: relative;
+    height: 10px;
+    width: 90%;
+    background: #2a292a;
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+.progress-bar.percent31 .progress-fill {
+    width: 31%
+}
+
+.progress-bar.percent5 .progress-fill {
+    width: 5%
+}
+
+.progress-bar.percent1 .progress-fill {
+    width: 1%
+}
+
+.progress-fill {
+    position: absolute;
+    height: 10px;
+    width: 31%;
+    animation: progress-forward 3s infinite;
+    background: white;
+    border-radius: 15px;
 }

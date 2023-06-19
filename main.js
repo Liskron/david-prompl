@@ -29,7 +29,7 @@ async function showTab(id) {
     tabNode.classList.remove('hidden');
 
 
-    renderNumbers(24)
+    renderNumbers(27)
 
     const rowNodes = [
         document.querySelector(`#${id}-row-1`),

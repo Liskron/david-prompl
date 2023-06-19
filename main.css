@@ -56,6 +56,10 @@ body {
     margin-bottom: 20px;
 }
 
+.container-logos .text-logo > span:first-child {
+    margin-right: 20px;
+}
+
 .container-logos .list {
     font-size: 1em;
 
@@ -270,4 +274,18 @@ body {
     animation: progress-forward 3s infinite;
     background: white;
     border-radius: 15px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .module {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .container-code,
+    .container-logos{
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

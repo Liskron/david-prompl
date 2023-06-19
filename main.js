@@ -158,6 +158,19 @@ class TypeAsync extends HTMLSpanElement {
     }
 }
 
+function runObserver() {
+    let el = document.getElementById('module');
+    let observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                init()
+                observer.unobserve(entry.target)
+            }
+        })
+    })
+    observer.observe(el)
+}
+
 customElements.define('type-async', TypeAsync, {extends: 'span'})
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", runObserver);

@@ -134,7 +134,7 @@ function tabsReset() {
 
 const sleep = time => new Promise(resolve => setTimeout(resolve, time))
 
-class TypeAsync extends HTMLSpanElement {
+class TypeAsync extends HTMLElement {
 
     reset() {
         this.style.visibility = 'hidden';
@@ -179,6 +179,6 @@ function runObserver() {
     observer.observe(el)
 }
 
-customElements.define('type-async', TypeAsync, {extends: 'span'})
+customElements.define('type-async', TypeAsync)
 
 document.addEventListener("DOMContentLoaded", runObserver);

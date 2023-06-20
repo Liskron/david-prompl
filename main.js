@@ -159,15 +159,23 @@ class TypeAsync extends HTMLSpanElement {
 }
 
 function runObserver() {
+    alert('Running observer');
     let el = document.getElementById('module');
+    if(el){
+        alert('Fount module!')
+    }
     let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
+                alert('Running init!');
                 init()
                 observer.unobserve(entry.target)
             }
         })
     })
+    if(!observer){
+        alert('Observer is not found!')
+    }
     observer.observe(el)
 }
 

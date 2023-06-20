@@ -1,55 +1,62 @@
-async function init() {
-    bindButtonEvents();
-    await showTab('tab1');
+async function init1() {
+    bindButtonEvents("module-1");
+    await showTab('tab1', "module-1");
 }
 
-function bindButtonEvents() {
-    const tab1Button = document.querySelector('#tab1-button')
-    const tab2Button = document.querySelector('#tab2-button')
+async function init2() {
+    bindButtonEvents('module-2');
+    await showTab('tab1', 'module-2')
+}
+
+function bindButtonEvents(module) {
+    const selector = `[data-module=${module}]`
+    const tab1Button = document.querySelector(`${selector} [data-button=tab1]`)
+    const tab2Button = document.querySelector(`${selector} [data-button=tab2]`)
 
     tab1Button.onclick = () => {
         tab1Button.classList.add('active');
         tab2Button.classList.remove('active');
-        tabsReset()
-        showTab('tab1');
+        tabsReset(module)
+        showTab('tab1', module);
     };
 
     tab2Button.onclick = () => {
         tab2Button.classList.add('active');
         tab1Button.classList.remove('active');
-        tabsReset()
-        showSecondTab('tab2');
+        tabsReset(module)
+        showSecondTab('tab2', module);
     };
 }
 
-async function showTab(id) {
-    const logoNode = document.querySelector(`#container-${id}`)
-    logoNode.classList.remove('hidden');
-    const tabNode = document.querySelector(`#${id}`);
+async function showTab(id, module) {
+    showLogoColumn(id, module);
+    const selector = `[data-module=${module}] [data-tab=${id}]`
+
+    const tabNode = document.querySelector(selector);
     tabNode.classList.remove('hidden');
 
+    renderNumbers(module, 27)
 
-    renderNumbers(27)
 
     const rowNodes = [
-        document.querySelector(`#${id}-row-1`),
-        document.querySelector(`#${id}-row-2`),
-        document.querySelector(`#${id}-row-3`)];
+        document.querySelector(`${selector} [data-row=row-1]`),
+        document.querySelector(`${selector} [data-row=row-2]`),
+        document.querySelector(`${selector} [data-row=row-3]`)];
 
+    const hiddenContentNodes = document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`)
 
     for (const rowNode of rowNodes) {
         await spanNodeType(rowNode);
     }
-    const hiddenContentNodes = document.querySelector(`#${id}-hidden-content`);
     await hiddenContentNodeAnimate(hiddenContentNodes);
 
 }
 
-function renderNumbers(number) {
-    const columnNode = document.getElementById('number-column');
+function renderNumbers(module, number) {
+    const columnNode = document.querySelector(`[data-module=${module}] [data-number-column]`);
     columnNode.innerHTML = '';
 
-    for (let i = 1; i <= number; i++ ) {
+    for (let i = 1; i <= number; i++) {
         const numberRowElement = document.createElement('div');
         numberRowElement.innerText = i;
         numberRowElement.className = 'container__code-container__row-numbers__row';
@@ -57,24 +64,23 @@ function renderNumbers(number) {
     }
 }
 
-async function showSecondTab(id) {
-    const logoNode = document.querySelector(`#container-${id}`)
-    logoNode.classList.remove('hidden');
-    const tabNode = document.querySelector(`#${id}`)
-    tabNode.classList.remove('hidden');
+async function showSecondTab(id, module) {
+    showLogoColumn(id, module)
+    showTabNode(id, module)
 
-    renderNumbers(48)
+    renderNumbers(module, 48)
 
+    const selector = `[data-module=${module}] [data-tab=${id}]`
     const rowNodes = [
-        document.querySelector(`#${id}-row-1`),
-        document.querySelector(`#${id}-row-2`),
-        document.querySelector(`#${id}-row-3`)];
+        document.querySelector(`${selector} [data-row=row-1]`),
+        document.querySelector(`${selector} [data-row=row-2]`),
+        document.querySelector(`${selector} [data-row=row-3]`)];
 
     const hiddenContentNodes = [
-        document.querySelector(`#${id}-hidden-content-1`),
-        document.querySelector(`#${id}-hidden-content-2`),
-        document.querySelector(`#${id}-hidden-content-3`)
-    ]
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`),
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-2]`),
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-3]`)
+    ].filter(v => !!v);
 
     await spanNodeType(rowNodes[0]);
     await hiddenContentNodeAnimate(hiddenContentNodes[0]);
@@ -85,7 +91,7 @@ async function showSecondTab(id) {
 }
 
 async function spanNodeType(rowNode) {
-    for(const spanNode of rowNode.children){
+    for (const spanNode of rowNode.children) {
         await spanNode.type();
     }
 }
@@ -97,24 +103,24 @@ async function hiddenContentNodeAnimate(hiddenContentNode) {
     }
 }
 
-function tabsReset() {
-    const resetOneTab = (id) => {
-        const logoNode = document.querySelector(`#container-${id}`)
-        logoNode.classList.add('hidden');
-        const tabNode = document.querySelector(`#${id}`);
-        tabNode.classList.add('hidden');
+function tabsReset(module) {
+    const resetOneTab = (id, module) => {
+        hideLogoNode(id, module);
+
+        const selector = `[data-module=${module}] [data-tab=${id}]`
+
+        document.querySelector(selector).classList.add('hidden');
 
         const rowNodes = [
-            document.querySelector(`#${id}-row-1`),
-            document.querySelector(`#${id}-row-2`),
-            document.querySelector(`#${id}-row-3`)];
+            document.querySelector(`${selector} [data-row=row-1]`),
+            document.querySelector(`${selector} [data-row=row-2]`),
+            document.querySelector(`${selector} [data-row=row-3]`)];
 
         const hiddenContentNodes = [
-            document.querySelector(`#${id}-hidden-content`),
-            document.querySelector(`#${id}-hidden-content-1`),
-            document.querySelector(`#${id}-hidden-content-2`),
-            document.querySelector(`#${id}-hidden-content-3`)
-        ].filter(v=> !!v);
+            document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`),
+            document.querySelector(`${selector} [data-hidden-content=hidden-content-2]`),
+            document.querySelector(`${selector} [data-hidden-content=hidden-content-3]`)
+        ].filter(v => !!v);
 
         for (const rowNode of rowNodes) {
             for (const spanNode of rowNode.children) {
@@ -123,13 +129,13 @@ function tabsReset() {
         }
 
         for (const hiddenContentNode of hiddenContentNodes) {
-            for (const contentNode of hiddenContentNode.children){
+            for (const contentNode of hiddenContentNode.children) {
                 contentNode.classList.remove('animated');
             }
         }
     }
 
-    ['tab1', 'tab2'].forEach(id => resetOneTab(id))
+    ['tab1', 'tab2'].forEach(id => resetOneTab(id, module))
 }
 
 const sleep = time => new Promise(resolve => setTimeout(resolve, time))
@@ -158,19 +164,67 @@ class TypeAsync extends HTMLElement {
     }
 }
 
-function runObserver() {
-    let el = document.getElementById('module');
+class ContainerLogos extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        let template = document.getElementById("container-logos");
+        let templateContent = template.content;
+
+        const shadowRoot = this.attachShadow({mode: "open"});
+        shadowRoot.appendChild(templateContent.cloneNode(true));
+    }
+
+    openTab(id) {
+        const logoNode = this.shadowRoot.querySelector(`[data-tab=${id}]`)
+        logoNode.classList.remove('hidden');
+    }
+
+    hideTab(id) {
+        const logoNode = this.shadowRoot.querySelector(`[data-tab=${id}]`)
+        logoNode.classList.add('hidden');
+    }
+}
+
+function showLogoColumn(id, module) {
+    document.querySelector(`[data-module=${module}] container-logos`).openTab(id)
+}
+
+function hideLogoNode(id, module) {
+    document.querySelector(`[data-module=${module}] container-logos`).hideTab(id)
+}
+
+function showTabNode(id, module) {
+    document.querySelector(`[data-module=${module}] [data-tab=${id}]`).classList.remove('hidden');
+}
+
+function runObserver(moduleElement) {
     let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                init()
+            if (entry.isIntersecting) {
+                if (entry.target.getAttribute('data-module') === 'module-1') {
+                    init1()
+                }
+
+                if (entry.target.getAttribute('data-module') === 'module-2') {
+                    init2()
+                }
                 observer.unobserve(entry.target)
             }
         })
     })
-    observer.observe(el)
+    observer.observe(moduleElement)
 }
+
+function initModules() {
+    let modules = document.querySelectorAll('[data-module^=module]');
+    modules.forEach(runObserver)
+}
+
+customElements.define("container-logos", ContainerLogos);
 
 customElements.define('type-async', TypeAsync)
 
-document.addEventListener("DOMContentLoaded", runObserver);
+document.addEventListener("DOMContentLoaded", initModules);

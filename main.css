@@ -19,63 +19,13 @@ body {
     white-space: normal;
 }
 
-.container-logos {
+container-logos {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: calc(30% - 15px);
     padding: 5px;
-}
-
-.container-logos > div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.container-logos .img {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.container-logos .img img {
-    max-width: 100%;
-    margin-bottom: 20px;
-    max-height: 80px;
-}
-
-.container-logos .text-logo {
-    font-size: 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.container-logos .text-logo > span:first-child {
-    margin-right: 20px;
-}
-
-.container-logos .list {
-    font-size: 1em;
-
-    margin-bottom: 40px;
-}
-
-.container-logos .list > span {
-    font-weight: 600;
-}
-
-.container-logos .list > ul {
-    margin-top: 5px;
-}
-
-.container-logos .hidden {
-    display: none;
 }
 
 .container-code {
@@ -244,38 +194,6 @@ body {
     color: #8b949e;
 }
 
-/* Progress bar*/
-
-.progress-bar {
-    position: relative;
-    height: 10px;
-    width: 90%;
-    background: #2a292a;
-    border-radius: 25px;
-    margin-bottom: 25px;
-}
-
-.progress-bar.percent31 .progress-fill {
-    width: 31%
-}
-
-.progress-bar.percent5 .progress-fill {
-    width: 5%
-}
-
-.progress-bar.percent1 .progress-fill {
-    width: 1%
-}
-
-.progress-fill {
-    position: absolute;
-    height: 10px;
-    width: 31%;
-    animation: progress-forward 3s infinite;
-    background: white;
-    border-radius: 15px;
-}
-
 
 @media screen and (max-width: 1000px) {
     .module {
@@ -284,7 +202,7 @@ body {
     }
 
     .container-code,
-    .container-logos{
+    container-logos{
         width: 100%;
         margin-bottom: 10px;
     }

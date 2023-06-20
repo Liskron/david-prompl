@@ -7,170 +7,361 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="module" id="module">
-        <div class="container-code">
-            <div class="container__tab-container">
-                <div class="container__tab-container__tab-title active" id="tab1-button">
-                    P{L} input/output
-                </div>
-                <div class="container__tab-container__tab-title" id="tab2-button">
-                    P{L} execute
-                </div>
+<template id="container-logos">
+    <link rel="stylesheet" href="./container-logos.css">
+    <div data-tab="tab1">
+        <div class="text-logo">
+            <span>Open AI</span>
+            <span>Landchain</span>
+        </div>
+        <div class="list">
+            <span>Users (tags)</span>
+            <ul>
+                <li>Online marketing</li>
+                <li>Digital marketing</li>
+                <li>Social media marketing</li>
+            </ul>
+        </div>
+        <div class="img">
+            <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/649061902495015645e57def_tailwindcss.svg"
+                 alt="">
+            <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/649061902790530b39666206_canva.svg"
+                 alt="">
+            <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/64906190a366f26f86139b08_pinterest.svg"
+                 alt="">
+        </div>
+    </div>
+    <div data-tab="tab2" class="hidden">
+        <h3>Prompl Extraction 3145</h3>
+        <div class="progress-bar percent31">
+            <div class="progress-fill"></div>
+        </div>
+        <h3>Prompl Social Media Posting 0082</h3>
+        <div class="progress-bar percent5">
+            <div class="progress-fill"></div>
+        </div>
+        <h3>Prompl Image Creation 0008</h3>
+        <div class="progress-bar percent1">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+</template>
+
+<div class="module" data-module="module-1">
+    <div class="container-code">
+        <div class="container__tab-container">
+            <div class="container__tab-container__tab-title active" data-button="tab1">
+                P{L} input/output
             </div>
-            <div class="container__code-container">
-                <div class="container__code-container__row-numbers" id="number-column"></div>
-                <div class="container__code-container__content" id="tab1">
-                    <pre><span class="visible">(USER) "PROBLEM/TASK" &lt;MODEL&gt; {VARIABLES} [TOOLS]</span></pre>
-                    <pre> </pre>
-                    <pre id="tab1-row-1"><type-async data-text="("></type-async><type-async class="blue" data-text="online marketer"></type-async><type-async data-text=") 'Increase engagement on Pinterest posts' < Chatgpt,Langchain >"></type-async></pre>
-                    <pre id="tab1-row-2"><type-async data-text="{Account: "></type-async><type-async class="red" data-text="@myaccount"></type-async><type-async data-text=", Target audience: Female, Niche: Food}"></type-async></pre>
-                    <pre id="tab1-row-3"><type-async data-text="[Pinterest, Tailwind, Canva]"></type-async></pre>
-                    <pre> </pre>
-                    <div class="hidden-content" id="tab1-hidden-content">
-                        <div>
-                            <pre><span class="visible">Action #1:</span></pre>
-                            <pre><span class="visible">Analyze Pinterest Analytics to identify which posts are performing well and which</span></pre>
-                            <pre><span class="visible">need improvement <span class="visible blue no-border">&lt Prompl Extraction &gt</span>{<span class="visible red no-border">Account:</span><span class="visible blue no-border">@myaccount</span>}</span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Agent:</span><span class="visible blue no-border">&lt; Prompl Extraction &gt;</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Tool:</span><span class="visible blue no-border">Pinterest Analytics</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span class="visible blue no-border">30 minutes</span></span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible">Action #2:</span></pre>
-                            <pre><span class="visible">Design visually appealing Pinterest posts using Canva <span class="visible blue no-border">&lt;Prompl Image</span></span></pre>
-                            <pre><span class="visible"><span class="visible blue no-border">Creation&gt;</span>{<span class="visible red no-border">Niche:</span><span class="visible blue no-border">Food</span>}</span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Agent:</span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Tool:</span><span class="visible blue no-border">Canva</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Estimated time:</span><span class="visible blue no-border">1 hour</span></span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible">Action #3:</span></pre>
-                            <pre><span class="visible">Schedule Pinterest posts for optimal engagement using Pinterest <span class="visible blue no-border">&lt;Prompl</span></span></pre>
-                            <pre><span class="visible"><span class="visible blue no-border">Social Media Posting&gt;</span> {<span class="visible red no-border">Niche:</span> <span class="visible blue no-border">Food</span> }</span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Agent:</span><span class="visible blue no-border">&lt; Prompl Social Media Posting &gt;</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Tool:</span><span class="visible blue no-border">Pinterest</span></span></pre>
-                            <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span class="visible blue no-border">30 minutes</span></span></pre>
-                        </div>
-                        <div class="prompl-icon">
-                            Promp{L}
-                        </div>
-                    </div>
-                </div>
-                <div class="container__code-container__content hidden" id="tab2">
-                    <pre id="tab2-row-1"><type-async data-text="Analyze Pinterest Analytics to identify which posts are performing well and which need improvement"></type-async></pre>
-                    <pre> </pre>
-                    <div class="hidden-content" id="tab2-hidden-content-1">
-                        <div>
-                            <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest Analytics</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Analyze the performance of the Pinterest posts</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">20 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Identify posts that need improvement and create a list</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
-                        </div>
-                    </div>
-                    <pre> </pre>
-                    <pre id="tab2-row-2"><type-async data-text="Design visually appealing Pinterest posts using Canva"></type-async></pre>
-                    <pre> </pre>
-                    <div class="hidden-content" id="tab2-hidden-content-2">
-                        <div>
-                            <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Canva and select design type</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Design visually appealing Pinterest post using Canva</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">50 minutes</span></pre>
-                        </div>
-                    </div>
-                    <pre> </pre>
-                    <pre id="tab2-row-3"><type-async data-text="Schedule Pinterest posts for optimal engagement using Pinterest <Prompl Social Media Posting> {Niche: Food}"></type-async></pre>
-                    <pre> </pre>
-                    <div class="hidden-content" id="tab2-hidden-content-3">
-                        <div>
-                            <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest and navigate to "Create Pin"</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Select Pinterest post to schedule</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Choose optimal posting date and time</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest</span></pre>
-                            <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">10 minutes</span></pre>
-                            <pre><span class="visible"> </span></pre>
-                        </div>
-                        <div>
-                            <pre><span class="visible red">- Step 4: </span><span class="visible blue no-border">Schedule the Pinterest post</span></pre>
-                            <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
-                            <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest</span></pre>
-                        </div>
-                    </div>
-                </div>
+            <div class="container__tab-container__tab-title" data-button="tab2">
+                P{L} execute
             </div>
         </div>
-
-        <div class="container-logos">
-            <div id="container-tab1" >
-                <div class="text-logo">
-                    <span>Open AI</span>
-                    <span>Landchain</span>
-                </div>
-                <div class="list">
-                    <span>Users (tags)</span>
-                    <ul>
-                        <li>Online marketing</li>
-                        <li>Digital marketing</li>
-                        <li>Social media marketing</li>
-                    </ul>
-                </div>
-                <div class="img">
-                    <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/649061902495015645e57def_tailwindcss.svg" alt="">
-                    <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/649061902790530b39666206_canva.svg" alt="">
-                    <img src="https://uploads-ssl.webflow.com/64597d1b4544ca8b9da2f8f2/64906190a366f26f86139b08_pinterest.svg" alt="">
+        <div class="container__code-container">
+            <div class="container__code-container__row-numbers" data-number-column></div>
+            <div class="container__code-container__content" data-tab="tab1">
+                <pre><span class="visible">(USER) "PROBLEM/TASK" &lt;MODEL&gt; {VARIABLES} [TOOLS]</span></pre>
+                <pre> </pre>
+                <pre data-row="row-1"><type-async data-text="("></type-async><type-async class="blue"
+                                                                                        data-text="online marketer"></type-async><type-async
+                        data-text=") 'Increase engagement on Pinterest posts' < Chatgpt,Langchain >"></type-async></pre>
+                <pre data-row="row-2"><type-async data-text="{Account: "></type-async><type-async class="red"
+                                                                                                 data-text="@myaccount"></type-async><type-async
+                        data-text=", Target audience: Female, Niche: Food}"></type-async></pre>
+                <pre data-row="row-3"><type-async data-text="[Pinterest, Tailwind, Canva]"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-1">
+                    <div>
+                        <pre><span class="visible">Action #1:</span></pre>
+                        <pre><span class="visible">Analyze Pinterest Analytics to identify which posts are performing well and which</span></pre>
+                        <pre><span class="visible">need improvement <span class="visible blue no-border">&lt Prompl Extraction &gt</span>{<span
+                                class="visible red no-border">Account:</span><span class="visible blue no-border">@myaccount</span>}</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt; Prompl Extraction &gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Pinterest Analytics</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span
+                                class="visible blue no-border">30 minutes</span></span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible">Action #2:</span></pre>
+                        <pre><span class="visible">Design visually appealing Pinterest posts using Canva <span
+                                class="visible blue no-border">&lt;Prompl Image</span></span></pre>
+                        <pre><span class="visible"><span class="visible blue no-border">Creation&gt;</span>{<span
+                                class="visible red no-border">Niche:</span><span
+                                class="visible blue no-border">Food</span>}</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Canva</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time:</span><span
+                                class="visible blue no-border">1 hour</span></span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible">Action #3:</span></pre>
+                        <pre><span class="visible">Schedule Pinterest posts for optimal engagement using Pinterest <span
+                                class="visible blue no-border">&lt;Prompl</span></span></pre>
+                        <pre><span class="visible"><span class="visible blue no-border">Social Media Posting&gt;</span> {<span
+                                class="visible red no-border">Niche:</span> <span
+                                class="visible blue no-border">Food</span> }</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt; Prompl Social Media Posting &gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Pinterest</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span
+                                class="visible blue no-border">30 minutes</span></span></pre>
+                    </div>
+                    <div class="prompl-icon">
+                        Promp{L}
+                    </div>
                 </div>
             </div>
-            <div id="container-tab2" class="hidden">
-                <h3>Prompl Extraction 3145</h3>
-                <div class="progress-bar percent31">
-                    <div class="progress-fill"></div>
+            <div class="container__code-container__content hidden" data-tab="tab2">
+                <pre data-row="row-1"><type-async data-text="Analyze Pinterest Analytics to identify which posts are performing well and which need improvement"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-1">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Analyze the performance of the Pinterest posts</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">20 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Identify posts that need improvement and create a list</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                    </div>
                 </div>
-                <h3>Prompl Social Media Posting 0082</h3>
-                <div class="progress-bar percent5">
-                    <div class="progress-fill"></div>
+                <pre> </pre>
+                <pre data-row="row-2"><type-async
+                        data-text="Design visually appealing Pinterest posts using Canva"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-2">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Canva and select design type</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Design visually appealing Pinterest post using Canva</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">50 minutes</span></pre>
+                    </div>
                 </div>
-                <h3>Prompl Image Creation 0008</h3>
-                <div class="progress-bar percent1">
-                    <div class="progress-fill"></div>
+                <pre> </pre>
+                <pre data-row="row-3"><type-async
+                        data-text="Schedule Pinterest posts for optimal engagement using Pinterest <Prompl Social Media Posting> {Niche: Food}"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-3">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest and navigate to "Create Pin"</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Select Pinterest post to schedule</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Choose optimal posting date and time</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">10 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 4: </span><span class="visible blue no-border">Schedule the Pinterest post</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <container-logos></container-logos>
+
+</div>
+
+<div class="module" data-module="module-2">
+    <div class="container-code">
+        <div class="container__tab-container">
+            <div class="container__tab-container__tab-title active" data-button="tab1">
+                P{L} input/output
+            </div>
+            <div class="container__tab-container__tab-title" data-button="tab2">
+                P{L} execute
+            </div>
+        </div>
+        <div class="container__code-container">
+            <div class="container__code-container__row-numbers" data-number-column></div>
+            <div class="container__code-container__content" data-tab="tab1">
+                <pre><span class="visible">(USER) "PROBLEM/TASK" &lt;MODEL&gt; {VARIABLES} [TOOLS]</span></pre>
+                <pre> </pre>
+                <pre data-row="row-1"><type-async data-text="("></type-async><type-async class="blue"
+                                                                                         data-text="online marketer"></type-async><type-async
+                        data-text=") 'Increase engagement on Pinterest posts' < Chatgpt,Langchain >"></type-async></pre>
+                <pre data-row="row-2"><type-async data-text="{Account: "></type-async><type-async class="red"
+                                                                                                  data-text="@myaccount"></type-async><type-async
+                        data-text=", Target audience: Female, Niche: Food}"></type-async></pre>
+                <pre data-row="row-3"><type-async data-text="[Pinterest, Tailwind, Canva]"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-1">
+                    <div>
+                        <pre><span class="visible">Action #1:</span></pre>
+                        <pre><span class="visible">Analyze Pinterest Analytics to identify which posts are performing well and which</span></pre>
+                        <pre><span class="visible">need improvement <span class="visible blue no-border">&lt Prompl Extraction &gt</span>{<span
+                                class="visible red no-border">Account:</span><span class="visible blue no-border">@myaccount</span>}</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt; Prompl Extraction &gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Pinterest Analytics</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span
+                                class="visible blue no-border">30 minutes</span></span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible">Action #2:</span></pre>
+                        <pre><span class="visible">Design visually appealing Pinterest posts using Canva <span
+                                class="visible blue no-border">&lt;Prompl Image</span></span></pre>
+                        <pre><span class="visible"><span class="visible blue no-border">Creation&gt;</span>{<span
+                                class="visible red no-border">Niche:</span><span
+                                class="visible blue no-border">Food</span>}</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Canva</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time:</span><span
+                                class="visible blue no-border">1 hour</span></span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible">Action #3:</span></pre>
+                        <pre><span class="visible">Schedule Pinterest posts for optimal engagement using Pinterest <span
+                                class="visible blue no-border">&lt;Prompl</span></span></pre>
+                        <pre><span class="visible"><span class="visible blue no-border">Social Media Posting&gt;</span> {<span
+                                class="visible red no-border">Niche:</span> <span
+                                class="visible blue no-border">Food</span> }</span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Agent:</span><span
+                                class="visible blue no-border">&lt; Prompl Social Media Posting &gt;</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Tool:</span><span
+                                class="visible blue no-border">Pinterest</span></span></pre>
+                        <pre><span class="visible"><span class="visible red no-border">Estimated time: </span> <span
+                                class="visible blue no-border">30 minutes</span></span></pre>
+                    </div>
+                    <div class="prompl-icon">
+                        Promp{L}
+                    </div>
+                </div>
+            </div>
+            <div class="container__code-container__content hidden" data-tab="tab2">
+                <pre data-row="row-1"><type-async data-text="Analyze Pinterest Analytics to identify which posts are performing well and which need improvement"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-1">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Analyze the performance of the Pinterest posts</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">20 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Identify posts that need improvement and create a list</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Extraction&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Pinterest Analytics</span></pre>
+                    </div>
+                </div>
+                <pre> </pre>
+                <pre data-row="row-2"><type-async
+                        data-text="Design visually appealing Pinterest posts using Canva"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-2">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Canva and select design type</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Design visually appealing Pinterest post using Canva</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Image Creation&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span class="visible blue no-border">Canva</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">50 minutes</span></pre>
+                    </div>
+                </div>
+                <pre> </pre>
+                <pre data-row="row-3"><type-async
+                        data-text="Schedule Pinterest posts for optimal engagement using Pinterest <Prompl Social Media Posting> {Niche: Food}"></type-async></pre>
+                <pre> </pre>
+                <div class="hidden-content" data-hidden-content="hidden-content-3">
+                    <div>
+                        <pre><span class="visible red">- Step 1: </span><span class="visible blue no-border">Log in to Pinterest and navigate to "Create Pin"</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 2: </span><span class="visible blue no-border">Select Pinterest post to schedule</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">5 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 3: </span><span class="visible blue no-border">Choose optimal posting date and time</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                        <pre><span class="visible red">  Estimated time: </span><span class="visible blue no-border">10 minutes</span></pre>
+                        <pre><span class="visible"> </span></pre>
+                    </div>
+                    <div>
+                        <pre><span class="visible red">- Step 4: </span><span class="visible blue no-border">Schedule the Pinterest post</span></pre>
+                        <pre><span class="visible red">  Agent: </span><span class="visible blue no-border">&lt;Prompl Social Media Posting&gt;</span></pre>
+                        <pre><span class="visible red">  Tool: </span><span
+                                class="visible blue no-border">Pinterest</span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <container-logos></container-logos>
+
+</div>
 
 </body>
 </html>

@@ -1,55 +1,62 @@
-async function init1() {
-    bindButtonEvents("module-1");
-    await showTab('tab1', "module-1");
+async function init(module, id, buttonOptions) {
+    bindButtonEvents(module, buttonOptions);
+    await showTab(id, module);
 }
 
-async function init2() {
-    bindButtonEvents('module-2');
-    await showTab('tab1', 'module-2')
-}
+function bindButtonEvents(module, options) {
+    const {tab1Button, tab2Button} = returnButtons(module);
+    options = {isFirstEnabled: true, isSecondEnabled: true, ...options};
 
-function bindButtonEvents(module) {
-    const selector = `[data-module=${module}]`
-    const tab1Button = document.querySelector(`${selector} [data-button=tab1]`)
-    const tab2Button = document.querySelector(`${selector} [data-button=tab2]`)
-
-    tab1Button.onclick = () => {
-        tab1Button.classList.add('active');
-        tab2Button.classList.remove('active');
-        tabsReset(module)
-        showTab('tab1', module);
-    };
-
-    tab2Button.onclick = () => {
-        tab2Button.classList.add('active');
-        tab1Button.classList.remove('active');
-        tabsReset(module)
-        showSecondTab('tab2', module);
-    };
+    if (options.isFirstEnabled) {
+        tab1Button.onclick = () => showTab('tab1', module);
+    }
+    if (options.isSecondEnabled) {
+        tab2Button.onclick = () => showTab('tab2', module);
+    }
 }
 
 async function showTab(id, module) {
-    showLogoColumn(id, module);
-    const selector = `[data-module=${module}] [data-tab=${id}]`
+    tabsReset(module);
 
-    const tabNode = document.querySelector(selector);
-    tabNode.classList.remove('hidden');
+    hideButton(oppositeTab(id), module);
+    activateButton(id, module);
+
+    hideTabNode(oppositeTab(id), module);
+    showTabNode(id, module);
 
     renderNumbers(module, 27)
 
+    if(id === 'tab1') await firstTabAnimation(module)
+    if(id === 'tab2') await secondTabAnimation(module)
+}
 
-    const rowNodes = [
-        document.querySelector(`${selector} [data-row=row-1]`),
-        document.querySelector(`${selector} [data-row=row-2]`),
-        document.querySelector(`${selector} [data-row=row-3]`)];
-
-    const hiddenContentNodes = document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`)
+async function firstTabAnimation(module) {
+    const id = 'tab1';
+    const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
 
     for (const rowNode of rowNodes) {
         await spanNodeType(rowNode);
     }
-    await hiddenContentNodeAnimate(hiddenContentNodes);
 
+    showLogoColumn(id, module);
+    await sleep(666);
+
+    for (const hiddenContentNode of hiddenContentNodes) {
+        await hiddenContentNodeAnimate(hiddenContentNode);
+    }
+}
+
+async function secondTabAnimation(module) {
+    const id = 'tab2';
+    const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
+
+    for (let i = 0; i < rowNodes.length; i++) {
+        await spanNodeType(rowNodes[i]);
+        await hiddenContentNodeAnimate(hiddenContentNodes[i]);
+    }
+
+    showLogoColumn(id, module);
+    await sleep(666);
 }
 
 function renderNumbers(module, number) {
@@ -62,32 +69,6 @@ function renderNumbers(module, number) {
         numberRowElement.className = 'container__code-container__row-numbers__row';
         columnNode.append(numberRowElement);
     }
-}
-
-async function showSecondTab(id, module) {
-    showLogoColumn(id, module)
-    showTabNode(id, module)
-
-    renderNumbers(module, 48)
-
-    const selector = `[data-module=${module}] [data-tab=${id}]`
-    const rowNodes = [
-        document.querySelector(`${selector} [data-row=row-1]`),
-        document.querySelector(`${selector} [data-row=row-2]`),
-        document.querySelector(`${selector} [data-row=row-3]`)];
-
-    const hiddenContentNodes = [
-        document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`),
-        document.querySelector(`${selector} [data-hidden-content=hidden-content-2]`),
-        document.querySelector(`${selector} [data-hidden-content=hidden-content-3]`)
-    ].filter(v => !!v);
-
-    await spanNodeType(rowNodes[0]);
-    await hiddenContentNodeAnimate(hiddenContentNodes[0]);
-    await spanNodeType(rowNodes[1]);
-    await hiddenContentNodeAnimate(hiddenContentNodes[1]);
-    await spanNodeType(rowNodes[2]);
-    await hiddenContentNodeAnimate(hiddenContentNodes[2]);
 }
 
 async function spanNodeType(rowNode) {
@@ -106,21 +87,9 @@ async function hiddenContentNodeAnimate(hiddenContentNode) {
 function tabsReset(module) {
     const resetOneTab = (id, module) => {
         hideLogoNode(id, module);
+        hideTabNode(id, module);
 
-        const selector = `[data-module=${module}] [data-tab=${id}]`
-
-        document.querySelector(selector).classList.add('hidden');
-
-        const rowNodes = [
-            document.querySelector(`${selector} [data-row=row-1]`),
-            document.querySelector(`${selector} [data-row=row-2]`),
-            document.querySelector(`${selector} [data-row=row-3]`)];
-
-        const hiddenContentNodes = [
-            document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`),
-            document.querySelector(`${selector} [data-hidden-content=hidden-content-2]`),
-            document.querySelector(`${selector} [data-hidden-content=hidden-content-3]`)
-        ].filter(v => !!v);
+        const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
 
         for (const rowNode of rowNodes) {
             for (const spanNode of rowNode.children) {
@@ -180,11 +149,13 @@ class ContainerLogos extends HTMLElement {
     openTab(id) {
         const logoNode = this.shadowRoot.querySelector(`[data-tab=${id}]`)
         logoNode.classList.remove('hidden');
+        this.classList.add('fadein');
     }
 
     hideTab(id) {
         const logoNode = this.shadowRoot.querySelector(`[data-tab=${id}]`)
         logoNode.classList.add('hidden');
+        this.classList.remove('fadein');
     }
 }
 
@@ -200,16 +171,60 @@ function showTabNode(id, module) {
     document.querySelector(`[data-module=${module}] [data-tab=${id}]`).classList.remove('hidden');
 }
 
+function hideTabNode(id, module) {
+    document.querySelector(`[data-module=${module}] [data-tab=${id}]`).classList.add('hidden');
+}
+
+function activateButton(id, module) {
+    document.querySelector(`[data-module=${module}] [data-button=${id}]`).classList.add('active');
+}
+
+function hideButton(id, module) {
+    document.querySelector(`[data-module=${module}] [data-button=${id}]`).classList.remove('active');
+}
+
+function returnContentNodes(id, module) {
+    const selector = `[data-module=${module}] [data-tab=${id}]`;
+
+    const rowNodes = [
+        document.querySelector(`${selector} [data-row=row-1]`),
+        document.querySelector(`${selector} [data-row=row-2]`),
+        document.querySelector(`${selector} [data-row=row-3]`)];
+
+    const hiddenContentNodes = [
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-1]`),
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-2]`),
+        document.querySelector(`${selector} [data-hidden-content=hidden-content-3]`)
+    ].filter(v => !!v);
+
+    return {rowNodes, hiddenContentNodes};
+}
+
+function returnButtons(module) {
+    const selector = `[data-module=${module}]`
+    const tab1Button = document.querySelector(`${selector} [data-button=tab1]`)
+    const tab2Button = document.querySelector(`${selector} [data-button=tab2]`)
+
+    return {tab1Button, tab2Button}
+}
+
+function oppositeTab(id) {
+    return id === 'tab1' ? 'tab2' : 'tab1';
+}
+
 function runObserver(moduleElement) {
     let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 if (entry.target.getAttribute('data-module') === 'module-1') {
-                    init1()
+                    init('module-1', 'tab1', {isSecondEnabled: false})
                 }
 
                 if (entry.target.getAttribute('data-module') === 'module-2') {
-                    init2()
+                    init('module-2', 'tab1', {isSecondEnabled: false})
+                }
+                if (entry.target.getAttribute('data-module') === 'module-3') {
+                    init('module-3', 'tab2', {isFirstEnabled: false})
                 }
                 observer.unobserve(entry.target)
             }
@@ -224,7 +239,5 @@ function initModules() {
 }
 
 customElements.define("container-logos", ContainerLogos);
-
 customElements.define('type-async', TypeAsync)
-
 document.addEventListener("DOMContentLoaded", initModules);

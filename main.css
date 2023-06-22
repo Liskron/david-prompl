@@ -26,6 +26,12 @@ container-logos {
     flex-direction: column;
     width: calc(30% - 15px);
     padding: 5px;
+    opacity: 0;
+    transition: opacity .666s ease-in;
+}
+
+container-logos.fadein{
+    opacity: 1;
 }
 
 .container-code {

@@ -32,7 +32,6 @@
 
 .list {
     font-size: 1em;
-
     margin-bottom: 40px;
 }
 
@@ -42,9 +41,10 @@
 
 .list > ul {
     margin-top: 5px;
+    list-style: none;
 }
 
-:host > .hidden {
+:host .hidden {
     display: none;
 }
 

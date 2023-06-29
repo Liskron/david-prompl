@@ -63,6 +63,8 @@
 
 .progress-fill {
     position: absolute;
+    top: 0;
+    left: 0;
     height: 30px;
     width: 31%;
     animation: progress-forward 3s infinite;

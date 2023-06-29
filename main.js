@@ -24,14 +24,13 @@ async function showTab(id, module) {
     hideTabNode(oppositeTab(id), module);
     showTabNode(id, module);
 
-    renderNumbers(module, 27)
-
     if(id === 'tab1') await firstTabAnimation(module)
     if(id === 'tab2') await secondTabAnimation(module)
 }
 
 async function firstTabAnimation(module) {
     const id = 'tab1';
+    renderNumbers(module, 25)
     const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
 
     for (const rowNode of rowNodes) {
@@ -49,7 +48,7 @@ async function firstTabAnimation(module) {
 async function secondTabAnimation(module) {
     const id = 'tab2';
     const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
-
+    renderNumbers(module, 48)
     for (let i = 0; i < rowNodes.length; i++) {
         await spanNodeType(rowNodes[i]);
         await hiddenContentNodeAnimate(hiddenContentNodes[i]);
@@ -80,7 +79,7 @@ async function spanNodeType(rowNode) {
 async function hiddenContentNodeAnimate(hiddenContentNode) {
     for (const divNode of hiddenContentNode.children) {
         divNode.classList.add('animated');
-        await sleep(100);
+        await sleep(300);
     }
 }
 

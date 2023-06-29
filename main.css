@@ -136,9 +136,9 @@ container-logos.fadein{
     transition: opacity .5s ease-out, transform .5s ease-out;
 }
 
-.hidden-content pre span {
+.hidden-content pre > span {
     display: inline-block;
-    /* background-color: rgba(40, 199, 25, 0.1); */
+    background-color: rgba(40, 199, 25, 0.1);
     border-left: 2px solid #22B14C;
     padding-left: 3px;
 }

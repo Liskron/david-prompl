@@ -8,6 +8,7 @@ body {
     color: #FFF;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
+    background-color: #2b2b2b;
 }
 
 .module {
@@ -75,7 +76,7 @@ container-logos.fadein{
 
 .container__code-container {
     display: flex;
-    max-height: 616px;
+    max-height: 100%;
     overflow-y: auto;
     width: 100%;
     background-color: #24292f;
@@ -137,7 +138,7 @@ container-logos.fadein{
 
 .hidden-content pre span {
     display: inline-block;
-    background-color: rgba(56, 139, 253, 0.1);
+    /* background-color: rgba(40, 199, 25, 0.1); */
     border-left: 2px solid #22B14C;
     padding-left: 3px;
 }
@@ -198,6 +199,9 @@ container-logos.fadein{
 
 .gray {
     color: #8b949e;
+}
+.green {
+    color: #1cc04d
 }
 
 

@@ -123,7 +123,7 @@ class TypeAsync extends HTMLElement {
         this.toggleAnimation();
         for (let character of text) {
             this.innerHTML += character
-            await sleep(5)
+            await sleep(20)
         }
         this.toggleAnimation();
     }

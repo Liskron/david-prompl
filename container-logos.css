@@ -51,8 +51,9 @@
 /* Progress bar*/
 
 .progress-bar {
+    
     position: relative;
-    height: 10px;
+    height: 30px;
     width: 90%;
     background: #2a292a;
     border-radius: 25px;
@@ -60,15 +61,21 @@
 }
 
 .progress-bar.percent31 .progress-fill {
-    width: 31%
+    display: flex;
+    flex-direction: row;
+    width: 31%;
+    height: 100%;
+    
 }
 
 .progress-bar.percent5 .progress-fill {
-    width: 5%
+    width: 5%;
+    height: 100%;
 }
 
 .progress-bar.percent1 .progress-fill {
-    width: 1%
+    width: 1%;
+    height: 100%;
 }
 
 .progress-fill {

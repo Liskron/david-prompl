@@ -1,6 +1,6 @@
-async function init(module, id, buttonOptions) {
+async function init(module, id, buttonOptions, logoColumnOptions = {extended: false}) {
     bindButtonEvents(module, buttonOptions);
-    await showTab(id, module);
+    await showTab(id, module, logoColumnOptions);
 }
 
 function bindButtonEvents(module, options) {
@@ -15,7 +15,7 @@ function bindButtonEvents(module, options) {
     }
 }
 
-async function showTab(id, module) {
+async function showTab(id, module, logoOptions = {extended: false}) {
     tabsReset(module);
 
     hideButton(oppositeTab(id), module);
@@ -24,11 +24,11 @@ async function showTab(id, module) {
     hideTabNode(oppositeTab(id), module);
     showTabNode(id, module);
 
-    if(id === 'tab1') await firstTabAnimation(module)
-    if(id === 'tab2') await secondTabAnimation(module)
+    if(id === 'tab1') await firstTabAnimation(module, logoOptions);
+    if(id === 'tab2') await secondTabAnimation(module, logoOptions);
 }
 
-async function firstTabAnimation(module) {
+async function firstTabAnimation(module, logoOptions) {
     const id = 'tab1';
     renderNumbers(module, 25)
     const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
@@ -37,7 +37,7 @@ async function firstTabAnimation(module) {
         await spanNodeType(rowNode);
     }
 
-    showLogoColumn(id, module);
+    showLogoColumn(id, module, logoOptions);
     await sleep(666);
 
     for (const hiddenContentNode of hiddenContentNodes) {
@@ -45,7 +45,7 @@ async function firstTabAnimation(module) {
     }
 }
 
-async function secondTabAnimation(module) {
+async function secondTabAnimation(module, logoOptions) {
     const id = 'tab2';
     const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
     renderNumbers(module, 48)
@@ -54,7 +54,7 @@ async function secondTabAnimation(module) {
         await hiddenContentNodeAnimate(hiddenContentNodes[i]);
     }
 
-    showLogoColumn(id, module);
+    showLogoColumn(id, module, logoOptions);
     await sleep(666);
 }
 
@@ -85,7 +85,7 @@ async function hiddenContentNodeAnimate(hiddenContentNode) {
 
 function tabsReset(module) {
     const resetOneTab = (id, module) => {
-        hideLogoNode(id, module);
+        hideLogoColumn(id, module);
         hideTabNode(id, module);
 
         const {rowNodes, hiddenContentNodes} = returnContentNodes(id, module);
@@ -145,10 +145,20 @@ class ContainerLogos extends HTMLElement {
         shadowRoot.appendChild(templateContent.cloneNode(true));
     }
 
+    showExtendedContent(id) {
+        const extendedContent = this.shadowRoot.querySelector(`[data-tab=${id}] [data-extended-content]`);
+        extendedContent.classList.remove('hidden');
+    }
+
     openTab(id) {
         const logoNode = this.shadowRoot.querySelector(`[data-tab=${id}]`)
         logoNode.classList.remove('hidden');
         this.classList.add('fadein');
+    }
+
+    hideExtendedContent(id) {
+        const extendedContent = this.shadowRoot.querySelector(`[data-tab=${id}] [data-extended-content]`);
+        extendedContent.classList.add('hidden');
     }
 
     hideTab(id) {
@@ -158,12 +168,18 @@ class ContainerLogos extends HTMLElement {
     }
 }
 
-function showLogoColumn(id, module) {
-    document.querySelector(`[data-module=${module}] container-logos`).openTab(id)
+function showLogoColumn(id, module, options= {extended: false}) {
+    const logoNode = document.querySelector(`[data-module=${module}] container-logos`);
+    logoNode.openTab(id);
+    if(options.extended){
+        logoNode.showExtendedContent(id);
+    }
 }
 
-function hideLogoNode(id, module) {
-    document.querySelector(`[data-module=${module}] container-logos`).hideTab(id)
+function hideLogoColumn(id, module) {
+    const logoNode = document.querySelector(`[data-module=${module}] container-logos`);
+    logoNode.hideTab(id);
+    logoNode.hideExtendedContent(id);
 }
 
 function showTabNode(id, module) {
@@ -220,7 +236,7 @@ function runObserver(moduleElement) {
                 }
 
                 if (entry.target.getAttribute('data-module') === 'module-2') {
-                    init('module-2', 'tab1', {isSecondEnabled: false})
+                    init('module-2', 'tab1', {isSecondEnabled: false}, {extended: true})
                 }
                 if (entry.target.getAttribute('data-module') === 'module-3') {
                     init('module-3', 'tab2', {isFirstEnabled: false})
